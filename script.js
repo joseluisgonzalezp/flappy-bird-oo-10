@@ -25,8 +25,7 @@ const juego = {
 
   iniciar: function () {
     // 3. Llama a audio.crear()
-
-    
+    audio.crear();
     document.addEventListener("keyup", bird.mover);
     obstaculos.crear();
     juego.timerObstaculos = setInterval(obstaculos.crear, 3000);
@@ -36,8 +35,7 @@ const juego = {
 
   terminar: function () {  
     // 6. Llama a audio.effects.die.play();
-
-
+    audio.effects.die.play();
     clearInterval(juego.timerId);
     clearInterval(juego.timerObstaculos);
     juego.mostrarGameOver();
@@ -77,7 +75,7 @@ const contador = {
     if (bird.left == parObstaculos.left) {
       contador.puntaje += 1;
       // 7. Llama a audio.effects.point.play();
-
+      audio.effects.point.play();
       console.log("puntaje: " + contador.puntaje);
     }
   },
@@ -104,7 +102,7 @@ const bird = {
     bird.bottom += 40;
 
     // 4. Llama a audio.effects.wing.play();
-
+    audio.effects.wing.play();
   },
 
   colisionY: function (parObstaculos) {
@@ -138,8 +136,7 @@ const bird = {
         obs.topObstacle.setAttribute("id", "colision");
         obs.bottomObstacle.setAttribute("id", "colision");
         //  5. Llama a audio.effects.hit.play();
-
-
+        audio.effects.hit.play();
         juego.terminar();
       }
     });
@@ -227,8 +224,8 @@ const obstaculos = {
 // Objeto audio
 const audio = {
   // 1. Agrega effects
+  effects: {},
 
-  
   // Agrega crear()
   crear: function () {
     const wing = new Audio("audio/audio_wing.wav");
